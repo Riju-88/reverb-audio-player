@@ -38,7 +38,7 @@ grant_type: 'client_credentials'
 fetch('https://accounts.spotify.com/api/token', authOptions)
 .then(response => response.json())
 .then(data =>{ 
-console.log(data.access_token);
+// console.log(data.access_token);
 
 const accessToken=data.access_token;
 
@@ -51,7 +51,7 @@ headers: {
 })
 .then(response => response.json())
 .then(data =>{ 
-console.log(data);
+// console.log(data);
 const tracks = data.items;
 
 allTracks = allTracks.concat(data.items);
@@ -89,7 +89,7 @@ return item.track.album.images[1].url;
 }
 
 }).filter(index=>index!=undefined);
-console.log(arrImage);
+// console.log(arrImage);
 
 // array of track name
 const arrTracks=allTracks.map((item) =>{
@@ -517,7 +517,7 @@ let newVal = arrTracks.indexOf(list.value);
  
 newVal++;
 list.innerHTML = `<option>${arrTracks[newVal]}</option>${mappedAll}`;
-console.log(newVal,arrTracks[newVal],arr[newVal]);
+// console.log(newVal,arrTracks[newVal],arr[newVal]);
 //setting the value in audio src
 audioElement.src = arr[newVal];
 //
@@ -549,7 +549,7 @@ let list = document.querySelector("#list");
 let mappedAll = arrTracks.map(i => `<option>${i}</option>`);
 
 if (arrTracks.indexOf(list.value) == arrTracks.length - 1) {
-console.log("if");
+// console.log("if");
 list.innerHTML = `<option>${arrTracks[0]}</option>${mappedAll}`;
 
 //setting the value in the audio src
