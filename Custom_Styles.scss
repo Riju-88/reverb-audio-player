@@ -2,16 +2,20 @@ html,body {
             margin: auto;
             padding: 0;
             /*height: calc(100vh - 1rem); */
-            width: calc(100vw - 2rem);
+            // width: calc(100vw - 2rem);
 
-            border-radius: 0.5rem;
+            // border-radius: 0.5rem;
         }
 
         body {
             position: relative;
-            background: linear-gradient(110deg,  #051f7e, #831ad8);
+            background: linear-gradient(110deg,  #000f46, #831ad8);
+            
             color: #00a0ff;
-            border: 1px solid blue;
+            border: 2px solid;
+            border-image: linear-gradient(to right, gold, rgb(241, 193, 35)) 1;
+            border-radius: 8px;
+            box-shadow: 0 0 6px gold;
             font-family: sans-serif;
             /* animation: bgColor 8s linear alternate infinite; */
         }
@@ -255,7 +259,7 @@ html,body {
             height: 100%;
             inset: 0;
             background: url("data:image/png;base64,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") no-repeat center;
-
+			background-size: 70px 70px;
             animation: rotZ 6s linear infinite;
         }
 
@@ -485,7 +489,7 @@ html,body {
         }
 
         /*  */
-        /* */
+        /* media queries */
 
         @media (min-width: 640px) {
             button {
@@ -630,10 +634,21 @@ html,body {
                 /* padding: 0.5rem 0.6rem; */
             }
         }
+
+       
+          
+          /* Media query for screens with a maximum width of 768px (tablets) */
+        //   @media (max-width: 768px) {
+        //     body {
+        //       width: 75vw;
+        //     }
+        //   }
+          
    
 body {
  
   text-align: center;
+  width: clamp(300px, 75vw, calc(100vw / 3));
 }
 
 $base-color: #71c8f1;
@@ -727,7 +742,8 @@ input[type='range'] {
 }
 
 fieldset {
-  border: #999 solid .2em;
+  border: 2px solid gold;
+
   border-radius: .5em;
   display: flex;
   
@@ -741,7 +757,7 @@ fieldset {
   position: relative;
   transition: border-color .25s linear;
   &:hover {
-    border: #BBB solid .2em;
+    border: 2px solid rgb(27, 205, 236);
   }
 }
 legend {

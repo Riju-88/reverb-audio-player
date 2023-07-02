@@ -19,7 +19,7 @@ let nextButton = document.getElementById('next-button');
 const user_id = '31bhzb3xhsss7dukrqn3p6u45ory';
 const playlist_id = '1nGLCFwiSSGcSmGhKErke7';
 const client_id = 'db73724c065b48e18a37fa178f573970';
-const client_secret = 'd21b726011594e3d82e21d2895ad99e3';
+const client_secret = '73d1e47eca2243889cd4d79d66e33ee2';
 const limit = 100;
 let offset = 0;
 let allTracks = [];
@@ -92,7 +92,7 @@ return item.track.album.images[1].url;
 // console.log(arrImage);
 
 // array of track name
-const arrTracks=allTracks.map((item) =>{
+let arrTracks=allTracks.map((item) =>{
 if (item.track.preview_url!= null) {
 return item.track.name;
 }
@@ -130,9 +130,10 @@ if (i == arrTracks[rng]) {
     `<option>${i}</option>`
 }
 
-});
-let mappedAll = arrTracks.map(i => `<option>${i}</option>`);
+}).join("");
+let mappedAll = arrTracks.map(i => `<option>${i}</option>`).join("");
 list.innerHTML = `${mapped}${mappedAll}`;
+// console.log(arr);
 
 let reflectTop = document.querySelector("#reflectTop");
 let reflectBottom = document.querySelector("#reflectBottom");
@@ -154,7 +155,7 @@ document.querySelector("#audio-duration").innerHTML =
 
 // set the array of tracks in list.innerHTML
 let list = document.querySelector("#list");
-let mapped = arrTracks.map(i => `<option>${i}</option>`);
+let mapped = arrTracks.map(i => `<option>${i}</option>`).join("");
 list.innerHTML = `<option>---</option>${mapped}`;
 
 // code for select
@@ -180,6 +181,105 @@ document.querySelector("#audio-duration").innerHTML =
 });
 
 });
+
+ // add to playlist button
+    const addFav = document.querySelector("#addFav");
+    addFav.addEventListener("click", () => {
+
+      let list = document.querySelector("#list");
+
+      // Retrieve the array from localStorage
+      // if the playList array doesn't exist in localStorage, it defaults to an empty array using the || [] operator
+      const playList = JSON.parse(localStorage.getItem('playList')) || [];
+
+      if (Array.isArray(playList)) {
+        // The array exists in localStorage
+        // console.log('Playlist exists:', playList);
+
+        const str = String.raw`${list.value}`;
+
+        if (!playList.includes(str)) {
+          // The string is not found in the array, push it
+          playList.push(str);
+          console.log('Track added:', str);
+          console.log('Playlist updated:', playList);
+
+          // Store the updated array back to localStorage
+          localStorage.setItem('playList', JSON.stringify(playList));
+        } else {
+          console.log('Track already exists:', str);
+        }
+      } else {
+        // The array does not exist in localStorage
+        console.log('Playlist does not exist');
+      }
+
+
+
+
+    })
+
+    // load playlist
+    const loadPlaylist = document.querySelector("#loadPlaylist");
+    loadPlaylist.addEventListener("click", () => {
+      // Retrieve the array from localStorage
+      // if the playList array doesn't exist in localStorage, it defaults to an empty array using the || [] operator
+      const playList = JSON.parse(localStorage.getItem('playList')) || [];
+    //   console.log(playList);
+      // list
+      const list = document.querySelector("#list");
+      const mapList = playList.map(i => `<option>${i}</option>`).join('');
+      list.innerHTML = mapList;
+
+      // try the code here
+      // getting the values of <option> and adding them to currentList
+      let currentList = [];
+      //  console.log(list.children.value);
+      list.childNodes.forEach(i => {
+        // console.log(i.value);
+        currentList.push(i.value);
+      });
+
+      //  since other buttons rely on arr and arrTracks, setting arr to newArr and arrTracks to currentList
+  
+
+    //   create new object with all tracks as keys and arr as values(urls)
+    const obj = arrTracks.reduce((acc, key, index) => {
+        acc[key] = arr[index];
+        return acc;
+      }, {});
+
+    //   using map to create new array(newArr) which will have the obj values as keys
+      const newArr = currentList.map(key => obj[key]).filter(value => value !== undefined);
+
+    //   setting track names to playlist track names
+    // arrTracks contains global track names
+    // currentList contains track names of user playlist
+      arrTracks = currentList;
+
+    //   setting track urls to newArr
+    // arr contains global track urls
+    // newArr contains track urls of user playlist
+      arr = newArr;
+    })
+
+    // delete playlist
+    const deletePlaylist = document.querySelector("#deletePlaylist");
+    deletePlaylist.addEventListener("click", () => {
+      // Retrieve the array from localStorage
+      // if the playList array doesn't exist in localStorage, it defaults to an empty array using the || [] operator
+      const playList = JSON.parse(localStorage.getItem('playList')) || [];
+    //   console.log(playList);
+      //  if the array exists in localStorage, remove it
+      if (Array.isArray(playList)) {
+        playList.splice(0, playList.length);
+        localStorage.setItem('playList', JSON.stringify(playList));
+      }
+      // reload to update the playlist
+      window.location.reload();
+
+    })
+
 //dialog code
 const showImg = document.getElementById("showImg");
 showImg.addEventListener("click", () => {
@@ -314,20 +414,36 @@ let z = document.querySelector("#z");
 
 x.addEventListener("input", () => {
 // Set the panner's position in 3D space
-panner.setPosition(document.querySelector("#x").value, document.querySelector("#y").value, document
-.querySelector("#z").value);
+// panner.setPosition(document.querySelector("#x").value, document.querySelector("#y").value, document
+// .querySelector("#z").value);
+
+panner.positionX.value = parseFloat(document.querySelector("#x").value);
+panner.positionY.value = parseFloat(document.querySelector("#y").value);
+panner.positionZ.value = parseFloat(document.querySelector("#z").value);
 //  console.log(x.value);
 });
 y.addEventListener("input", () => {
 // Set the panner's position in 3D space
-panner.setPosition(document.querySelector("#x").value, document.querySelector("#y").value, document
-.querySelector("#z").value);
+// panner.setPosition(document.querySelector("#x").value, document.querySelector("#y").value, document
+// .querySelector("#z").value);
+
+
+panner.positionX.value = parseFloat(document.querySelector("#x").value);
+panner.positionY.value = parseFloat(document.querySelector("#y").value);
+panner.positionZ.value = parseFloat(document.querySelector("#z").value);
+
+
 //  console.log(y.value);
 });
 z.addEventListener("input", () => {
 // Set the panner's position in 3D space
-panner.setPosition(document.querySelector("#x").value, document.querySelector("#y").value, document
-.querySelector("#z").value);
+// panner.setPosition(document.querySelector("#x").value, document.querySelector("#y").value, document
+// .querySelector("#z").value);
+
+panner.positionX.value = parseFloat(document.querySelector("#x").value);
+panner.positionY.value = parseFloat(document.querySelector("#y").value);
+panner.positionZ.value = parseFloat(document.querySelector("#z").value);
+
 //  console.log(z.value);
 });
 
@@ -436,7 +552,7 @@ prevButton.addEventListener('click', function () {
 
 let list = document.querySelector("#list");
 
-let mappedAll = arrTracks.map(i => `<option>${i}</option>`);
+let mappedAll = arrTracks.map(i => `<option>${i}</option>`).join("");
 
 // arr[arrTracks.indexOf(list.value)]
 if (arrTracks.indexOf(list.value) == 0 || list.value == "---") {
@@ -490,7 +606,7 @@ nextButton.addEventListener('click', function () {
 
 let list = document.querySelector("#list");
 
-let mappedAll = arrTracks.map(i => `<option>${i}</option>`);
+let mappedAll = arrTracks.map(i => `<option>${i}</option>`).join("");
 
 
 if (arrTracks.indexOf(list.value) == -1 || list.value == "---" || arrTracks.indexOf(list.value) == arrTracks.length - 1) {
@@ -546,7 +662,7 @@ let eventAdded = false;
 let autoNext = function () {
 let list = document.querySelector("#list");
 
-let mappedAll = arrTracks.map(i => `<option>${i}</option>`);
+let mappedAll = arrTracks.map(i => `<option>${i}</option>`).join("");
 
 if (arrTracks.indexOf(list.value) == arrTracks.length - 1) {
 // console.log("if");
