@@ -261,6 +261,9 @@ document.querySelector("#audio-duration").innerHTML =
     // arr contains global track urls
     // newArr contains track urls of user playlist
       arr = newArr;
+
+      // setting audio src to arr[0]
+      audioElement.src = arr[0];
     })
 
     // delete playlist
@@ -447,10 +450,11 @@ panner.positionZ.value = parseFloat(document.querySelector("#z").value);
 //  console.log(z.value);
 });
 
+// commented out this line
 // Set the panner's position in 3D space
-panner.setPosition(document.querySelector("#x").value, document.querySelector("#y").value, document
-.querySelector(
-"#z").value);
+// panner.setPosition(document.querySelector("#x").value, document.querySelector("#y").value, document
+// .querySelector(
+// "#z").value);
 
 // Connect the audio source to the panner node
 source.connect(panner);
