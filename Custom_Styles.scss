@@ -171,6 +171,28 @@ html,body {
             padding: 0;
         }
 
+        // notification
+        #notification-dialog {
+            position: fixed;
+            inset-inline: 0;
+            top: 85%;
+           z-index: 999;
+           background: radial-gradient(circle at center, #4903b9 0%, #021e9c 100%, #2f03a8 200%); 
+            padding-inline: 1rem;
+            border: gold 1px solid;
+            color: gold;
+            font-size: 1.2rem;
+            border-radius: 100vmax;
+            box-shadow: 2px 2px 1.2rem rgba(0, 0, 0, 0.404), -2px -2px 1.2rem rgba(0, 0, 0, 0.404), -2px 2px 1.2rem rgba(0, 0, 0, 0.404), 2px -2px 1.2rem rgba(0, 0, 0, 0.404);
+            #notification {
+                position: fixed;
+                bottom: 20%;
+                
+                
+            }
+           
+        }
+    
 
         .bodyHeight {
             height: 10vh;

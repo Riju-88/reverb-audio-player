@@ -83,7 +83,7 @@ return index;
 }).filter(index=>index!=undefined);
 
 // track image/thumbnail in array
-const arrImage=allTracks.map((item) =>{
+let arrImage=allTracks.map((item) =>{
 if (item.track.preview_url!= null) {
 return item.track.album.images[1].url;
 }
@@ -141,8 +141,8 @@ let reflectBottom = document.querySelector("#reflectBottom");
 
 //adding img to reflect src(Any button/rng action)
 
-reflectTop.src = arrImage[arrTracks.indexOf(select.value)];
-reflectBottom.src = arrImage[arrTracks.indexOf(select.value)];
+reflectTop.src = arrImage[arrTracks.indexOf(list.value)];
+reflectBottom.src = arrImage[arrTracks.indexOf(list.value)];
 //  console.log(jpg);
 //  console.log(audioElement.src);
 
@@ -163,15 +163,16 @@ let select = document.querySelector("#list");
 
 
 select.addEventListener("change", () => {
+  let list = document.querySelector("#list");
 let reflectTop = document.querySelector("#reflectTop");
 let reflectBottom = document.querySelector("#reflectBottom");
 // console.log("select value: " + select.value);
-audioElement.src = arr[arrTracks.indexOf(select.value)];
+audioElement.src = arr[arrTracks.indexOf(list.value)];
 
 //adding img to reflect src(select action onclick)
 
-reflectTop.src = arrImage[arrTracks.indexOf(select.value)];
-reflectBottom.src = arrImage[arrTracks.indexOf(select.value)];
+reflectTop.src = arrImage[arrTracks.indexOf(list.value)];
+reflectBottom.src = arrImage[arrTracks.indexOf(list.value)];
 //  console.log(jpg);
 
 //adding audio duration on list item change
@@ -187,7 +188,9 @@ document.querySelector("#audio-duration").innerHTML =
     addFav.addEventListener("click", () => {
 
       let list = document.querySelector("#list");
-
+    
+      let notificationDialog = document.querySelector("#notification-dialog");
+      let notificationText = "";
       // Retrieve the array from localStorage
       // if the playList array doesn't exist in localStorage, it defaults to an empty array using the || [] operator
       const playList = JSON.parse(localStorage.getItem('playList')) || [];
@@ -202,19 +205,26 @@ document.querySelector("#audio-duration").innerHTML =
           // The string is not found in the array, push it
           playList.push(str);
           console.log('Track added:', str);
+          notificationText = `${str} added to playlist`;
           console.log('Playlist updated:', playList);
 
           // Store the updated array back to localStorage
           localStorage.setItem('playList', JSON.stringify(playList));
         } else {
           console.log('Track already exists:', str);
+          notificationText = `${str} already exists in playlist`;
         }
       } else {
         // The array does not exist in localStorage
         console.log('Playlist does not exist');
       }
 
-
+      notificationDialog.innerHTML = notificationText;
+      notificationDialog.show();
+      // add settimeout to auto close dialog
+      setTimeout(() => {
+        notificationDialog.close();
+      },2000);
 
 
     })
@@ -249,13 +259,27 @@ document.querySelector("#audio-duration").innerHTML =
         return acc;
       }, {});
 
+    //   create new object with all tracks as keys and arr as values(urls)
+    const imgObj = arrTracks.reduce((acc, key, index) => {
+        acc[key] = arrImage[index];
+        return acc;
+      }, {});
+
     //   using map to create new array(newArr) which will have the obj values as keys
       const newArr = currentList.map(key => obj[key]).filter(value => value !== undefined);
+
+    //   using map to create new array(newImgArr) which will have the imgObj values as keys
+      const newImgArr = currentList.map(key => imgObj[key]).filter(value => value !== undefined);
 
     //   setting track names to playlist track names
     // arrTracks contains global track names
     // currentList contains track names of user playlist
       arrTracks = currentList;
+
+    //   setting playlist track image urls to arrImg
+    // arrImg contains global track image urls
+    // newImgArr contains track image urls of user playlist
+      arrImage = newImgArr;
 
     //   setting track urls to newArr
     // arr contains global track urls
@@ -264,6 +288,34 @@ document.querySelector("#audio-duration").innerHTML =
 
       // setting audio src to arr[0]
       audioElement.src = arr[0];
+
+      // setting reflect src
+let reflectTop = document.querySelector("#reflectTop");
+let reflectBottom = document.querySelector("#reflectBottom");
+
+
+//adding img to reflect src(Any button/rng action)
+
+reflectTop.src = arrImage[arrTracks.indexOf(list.value)];
+reflectBottom.src = arrImage[arrTracks.indexOf(list.value)];
+console.log("list value: "+list.value);
+console.log("arr image: "+arrImage[arrTracks.indexOf(list.value)]);
+console.log("index of track: "+arrTracks.indexOf(list.value));
+console.log(arrTracks);
+console.log(arrImage);
+
+    // notification
+      let notificationDialog = document.querySelector("#notification-dialog");
+      let notificationText = "";
+      notificationText = `Custom Playlist Loaded`;
+      notificationDialog.innerHTML = notificationText;
+      notificationDialog.show();
+
+      // add settimeout to auto close dialog
+      setTimeout(() => {
+        notificationDialog.close();
+      },2000);
+
     })
 
     // delete playlist
@@ -507,6 +559,19 @@ wetGain.gain.value = wetGainControl.value;
 // play button
 playButton.addEventListener('click', function () {
 audioElement.play();
+
+    // notification
+      let list = document.querySelector("#list");
+      let notificationDialog = document.querySelector("#notification-dialog");
+      let notificationText = "";
+      notificationText = `Now Playing: ${list.value}`;
+      notificationDialog.innerHTML = notificationText;
+      notificationDialog.show();
+// add settimeout to auto close dialog
+setTimeout(() => {
+  notificationDialog.close();
+},2000);
+
 setInterval(() => {
 let minutes = Math.floor(audioElement.currentTime / 60);
 let seconds = Math.floor(audioElement.currentTime % 60);
@@ -572,8 +637,8 @@ let reflectBottom = document.querySelector("#reflectBottom");
 
 //adding img to reflect src(Any button/rng action)
 
-reflectTop.src = arrImage[arrTracks.indexOf(select.value)];
-reflectBottom.src = arrImage[arrTracks.indexOf(select.value)];
+reflectTop.src = arrImage[arrTracks.indexOf(list.value)];
+reflectBottom.src = arrImage[arrTracks.indexOf(list.value)];
 
 
 } else {
@@ -591,8 +656,8 @@ let reflectBottom = document.querySelector("#reflectBottom");
 
 //adding img to reflect src(Any button/rng action)
 
-reflectTop.src = arrImage[arrTracks.indexOf(select.value)];
-reflectBottom.src = arrImage[arrTracks.indexOf(select.value)];
+reflectTop.src = arrImage[arrTracks.indexOf(list.value)];
+reflectBottom.src = arrImage[arrTracks.indexOf(list.value)];
 
 
 }
@@ -626,8 +691,8 @@ let reflectBottom = document.querySelector("#reflectBottom");
 
 //adding img to reflect src(Any button/rng action)
 
-reflectTop.src = arrImage[arrTracks.indexOf(select.value)];
-reflectBottom.src = arrImage[arrTracks.indexOf(select.value)];
+reflectTop.src = arrImage[arrTracks.indexOf(list.value)];
+reflectBottom.src = arrImage[arrTracks.indexOf(list.value)];
 
 
 } else {
@@ -647,8 +712,8 @@ let reflectBottom = document.querySelector("#reflectBottom");
 
 //adding img to reflect src(Any button/rng action)
 
-reflectTop.src = arrImage[arrTracks.indexOf(select.value)];
-reflectBottom.src = arrImage[arrTracks.indexOf(select.value)];
+reflectTop.src = arrImage[arrTracks.indexOf(list.value)];
+reflectBottom.src = arrImage[arrTracks.indexOf(list.value)];
 
 
 }
@@ -681,8 +746,8 @@ let reflectBottom = document.querySelector("#reflectBottom");
 
 //adding img to reflect src(Any button/rng action)
 
-reflectTop.src = arrImage[arrTracks.indexOf(select.value)];
-reflectBottom.src = arrImage[arrTracks.indexOf(select.value)];
+reflectTop.src = arrImage[arrTracks.indexOf(list.value)];
+reflectBottom.src = arrImage[arrTracks.indexOf(list.value)];
 
 
 } else {
@@ -700,8 +765,8 @@ let reflectBottom = document.querySelector("#reflectBottom");
 
 //adding img to reflect src(Any button/rng action)
 
-reflectTop.src = arrImage[arrTracks.indexOf(select.value)];
-reflectBottom.src = arrImage[arrTracks.indexOf(select.value)];
+reflectTop.src = arrImage[arrTracks.indexOf(list.value)];
+reflectBottom.src = arrImage[arrTracks.indexOf(list.value)];
 
 
 }
@@ -714,6 +779,20 @@ document.querySelector("#audio-duration").innerHTML =
 
 // playing audio
 audioElement.play();
+
+    // notification
+    
+   
+    let notificationDialog = document.querySelector("#notification-dialog");
+    let notificationText = "";
+    notificationText = `Now Playing: ${list.value}`;
+    notificationDialog.innerHTML = notificationText;
+    notificationDialog.show();
+    // add settimeout to auto close dialog
+    setTimeout(() => {
+    notificationDialog.close();
+    },2000);
+
 setInterval(() => {
 let minutes = Math.floor(audioElement.currentTime / 60);
 let seconds = Math.floor(audioElement.currentTime % 60);
