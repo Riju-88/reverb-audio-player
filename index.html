@@ -38,6 +38,7 @@
     <audio id="audio" src='' crossorigin allow="autoplay"></audio>
 
 
+    
     <!--Dialog for reflection-->
     <dialog id="myDialog">
         <div class="dialog-top">
@@ -149,10 +150,36 @@
     </dialog>
 
     <!-- notification -->
-    <dialog id="notification-dialog" >
+    <dialog id="notification-dialog">
         <div class="notification-cont">
             <h3 id="notification"></h3>
         </div>
+    </dialog>
+
+    <!-- theme dialog -->
+    <dialog id="theme-dialog">
+        <div class="theme-cont">
+            <h3>Border Theme</h3>
+            <label for="borderColor">Select a color:</label>
+            <input type="color" id="borderColor" name="borderColor">
+
+        </div>
+        <div class="theme-cont">
+            <h3>Background Theme</h3>
+            <label for="colorPicker1">Background 1:</label>
+            <input type="color" id="colorPicker1" name="colorPicker1">
+
+            <label for="colorPicker2">Background 2:</label>
+            <input type="color" id="colorPicker2" name="colorPicker2">
+
+            <label for="colorPicker3">Background 3:</label>
+            <input type="color" id="colorPicker3" name="colorPicker3">
+        </div>
+        <!-- close button -->
+        <div class="theme-close-cont">
+            <button id="close-button">Close</button>
+        </div>
+        
     </dialog>
     <!-- -->
     <!-- List -->
@@ -267,8 +294,13 @@
             </div>
         </fieldset>
     </div>
+    <!-- theme container -->
+    <div class="theme-open-container">
+        <!-- theme switch -->
+    <button id="theme-button">Change Theme</button>
+    </div>
     <footer>
-        <p>Reverb Audio Player(version 48).</p>
+        <p>Reverb Audio Player(version 49).</p>
         <p> Made by Riju Mistri. View source code on
             <a href="https://github.com/Riju-88/reverb-audio-player">Github</a>
         </p>

@@ -917,7 +917,47 @@ getTracks();
 
 
 
-//
+// theme dialog
+
+const themeButton = document.getElementById("theme-button");
+themeButton.addEventListener("click", () => {
+  const themeDialog = document.getElementById("theme-dialog");
+  themeDialog.showModal();
+
+  // theme controls
+  let colorPicker1 = document.getElementById('colorPicker1');
+let colorPicker2 = document.getElementById('colorPicker2');
+let colorPicker3 = document.getElementById('colorPicker3');
+let borderColor = document.getElementById('borderColor');
+let rootElement = document.querySelector(':root');
+
+function updateBackground() {
+  let bg1 = colorPicker1.value;
+  let bg2 = colorPicker2.value;
+  let bg3 = colorPicker3.value;
+  let borderCol = borderColor.value;
+
+  rootElement.style.cssText = `
+  --gradient-start: ${bg1};
+  --gradient-middle: ${bg2};
+  --gradient-end: ${bg3};
+  --border: ${borderCol};
+`;
+console.log(rootElement.style.cssText);
+}
+
+colorPicker1.addEventListener('change', updateBackground);
+colorPicker2.addEventListener('change', updateBackground);
+colorPicker3.addEventListener('change', updateBackground);
+borderColor.addEventListener('change', updateBackground);
+
+})
+const closeButton = document.getElementById("close-button");
+
+closeButton.addEventListener("click", () => {
+  const themeDialog = document.getElementById("theme-dialog");
+  themeDialog.close();
+})
 //
 
 //
