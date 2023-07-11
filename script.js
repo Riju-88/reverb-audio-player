@@ -944,6 +944,10 @@ function updateBackground() {
   --border: ${borderCol};
 `;
 console.log(rootElement.style.cssText);
+colorPicker1.style.backgroundColor = colorPicker1.value;
+colorPicker2.style.backgroundColor = colorPicker2.value;
+colorPicker3.style.backgroundColor = colorPicker3.value;
+borderColor.style.backgroundColor = borderColor.value;
 }
 
 colorPicker1.addEventListener('change', updateBackground);
