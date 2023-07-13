@@ -220,7 +220,7 @@ select:focus {
     inset-inline: 0;
     top: 85%;
     z-index: 999;
-    background: radial-gradient(circle at center, var(--gradient-start) 0%, var(--gradient-middle) 100%, var(--gradient-end) 200%);
+    background: radial-gradient(circle at center, var(--gradient-middle) 0%, var(--gradient-start) 100%, var(--gradient-end) 200%);
     padding-inline: 1rem;
     border: var(--border) 1px solid;
     color: var(--border);
