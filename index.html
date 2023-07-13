@@ -6,7 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reverb Audio Player</title>
-
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="512x512" href="images/android-chrome-512x512.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="images/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-16x16.png">
+    <link rel="apple-touch-icon" type="image/png" href="images/apple-touch-icon.png">
     <link rel="stylesheet" href="Custom_Styles.min.css">
     <script src="script.js" defer></script>
 
@@ -38,7 +43,7 @@
     <audio id="audio" src='' crossorigin allow="autoplay"></audio>
 
 
-    
+
     <!--Dialog for reflection-->
     <dialog id="myDialog">
         <div class="dialog-top">
@@ -179,14 +184,18 @@
         <div class="theme-close-cont">
             <button id="close-button">Close</button>
         </div>
-        
+
     </dialog>
     <!-- -->
+    <!-- logo container -->
+    <div class="logo-cont">
+        <img src="images/reverbAudio.svg" alt="logo">
+    </div>
     <!-- List -->
     <div id="selCont">
         <fieldset>
             <legend>Playlist</legend>
-            <select name="list" id="list">
+            <select name="list" id="list" title="Playlist">
 
             </select>
         </fieldset>
@@ -222,14 +231,14 @@
     </div>
     <!-- current-time and duration-->
     <div id="time-cont">
-        <span id="current-time"></span>
-        <span id="audio-duration"></span>
+        <span id="current-time" title="Time elapsed"></span>
+        <span id="audio-duration" title="Audio Duration"></span>
 
     </div>
     <!--progress bar-->
     <div id="progress-bar-cont">
 
-        <div id="progress-bar">
+        <div id="progress-bar" title="Progress Bar">
 
         </div>
     </div>
@@ -237,15 +246,15 @@
     <div class="control-btn-bottom player-controls">
         <!-- adding playlist buttons here -->
         <div class="btn-bottom">
-            <button id="addFav" title="Add to Playlist">
+            <button id="addFav" title="Add to custom Playlist">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABXUlEQVR4nO2VvUoDQRSFPywiloLmIcRKGzGx8wlCbCwsfQex0qRIIYq+gK34CFpY2NiY2PgEgoKC6PrTCFm5MII7zsxmJ3cLYQ9cWHZm78ecmT0Dlf6RasAc0AK2gGPgCngGLjUA08AisAH0gFPgFvgC0kCNpbOc5qWB0wqM34U7a2vUrb4HzoFDYBNYBWYd36iA14EFYKrANyrgIqrAUYqxbdLUWEo1DkqZ4DrQBQbAu6k+0DFjpYDXgCQQLAnQ1gYLdDhCng+LwGs54LpnpctA0/H+1Uq4P5owTbdzwN2c69A1tms3kSg8MEHvss6lmwhw325yFHGpJ5a9PjWtg5bRYwD6MQK4EQCvWPuc0VMAfOFpONCwet8z8RNY8oA7EeAdu4lk6545XDLhATgB5gMW+n6nhmVvauoFmEFJ7QIB0tKC/obLofFBZaXq0B9JIkk4XANvpuRZ9jRj7zflyRmvlu1NJAAAAABJRU5ErkJggg=="
                     alt="add to playlist">
             </button>
-            <button id="loadPlaylist" title="Load Playlist">
+            <button id="loadPlaylist" title="Load custom Playlist">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA40lEQVR4nO2WwQpBQRSGv81NSbHyEPYWHsAb2HoAC/EGXsDCzsbGxnPImIUVS5Fi5Q0kKVKzuOmaO+44pOarszunr2b+OgcCgezkgBrQASbADtgiRBnoAwvgAtwSKhH9otlWKjavHPoTcRl8rlls/ppV7EuadPUt8QmYm39vAAVpcRuoApHroPYMV+Z/VJ7hEg2QjSB2RodwvUH0i3BVgNG3xEWgZ/as9yLQKeEax/bu+pMbSKWI66ZvaOl5HABiHC3ig6T4bBFPJcVLi7grKW5aLow8wrSAjXn2PTAAStJS/pY72kLWmBe1594AAAAASUVORK5CYII="
                     alt="load playlist">
             </button>
-            <button id="deletePlaylist" title="Delete Playlist">
+            <button id="deletePlaylist" title="Delete custom Playlist">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAcxJREFUWEftlrsvRFEQxn9LoiI6PQ2d119APBIiSOgkEhGVvwAh8foTJF6NUjQ0EkKrpPKoqAiVhNYj32bu5mRz77F71ma3uKfZm82cmW9mvm/mZKjwyVQ4PimAtAJxFWgCOoAL4MtIWgsMAPWBpP0Ezhx/OTdxAO6BVmANWDZLfS8FBo+uuf68AO6ANmAVWPlHAK4/LwC1oB24zGtBP9AQWIUP4LzQFgTGCLtWlTLcAyaAaeDY8hoHDkpUwZTjz8uBd6AR2AXmzFLfs2FFzt1y/XkBjALDwCbwZJbNJsNSSCgZRv68AEpMtLjrVUlCEW7IWvBo+bRYC5JGsUatSuzaLwKnwJH5qLPB9mO/2TEfV4FQErok2wdmAAUTkaUgARkxMIO2G2IB7ACTJsMTuzBmTpJIqEknmUX2kvGhJfgN3ABd5uvFlt1bUgWKY1GytSqgqtQ4Jq9AL3Ab/VdOEqrnV07miqnlpqX05zIq9j2Qv+8VXC3QTHGPODEPbPkqEPoecPf9BrBgQZ6Bbcte7RAnuo0XsSQMfQ+4+34dkAxFuB7gwUa5gOh4AYS8B/L3vZ5wfcA1kGW7nU6TplSRPeUkYUFqSgGkFah4BX4BMcFlIavW0QcAAAAASUVORK5CYII="
                     alt="delete playlist">
             </button>
@@ -297,10 +306,10 @@
     <!-- theme container -->
     <div class="theme-open-container">
         <!-- theme switch -->
-    <button id="theme-button">Change Theme</button>
+        <button id="theme-button" title="Change Theme">Change Theme</button>
     </div>
     <footer>
-        <p>Reverb Audio Player(version 50).</p>
+        <p>Reverb Audio Player(version 51).</p>
         <p> Made by Riju Mistri. View source code on
             <a href="https://github.com/Riju-88/reverb-audio-player">Github</a>
         </p>

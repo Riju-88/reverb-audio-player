@@ -220,7 +220,7 @@ select:focus {
     inset-inline: 0;
     top: 85%;
     z-index: 999;
-    background: radial-gradient(circle at center, #4903b9 0%, #021e9c 100%, #2f03a8 200%);
+    background: radial-gradient(circle at center, var(--gradient-start) 0%, var(--gradient-middle) 100%, var(--gradient-end) 200%);
     padding-inline: 1rem;
     border: var(--border) 1px solid;
     color: var(--border);
@@ -293,7 +293,16 @@ select:focus {
           
 }
 
+.logo-cont {
+    display: grid;
+    place-items: center;
 
+    img{
+        max-width: calc(100% / 3);
+        border-radius: 1rem;
+        
+    }
+}
 .bodyHeight {
     height: 10vh;
     overflow: hidden;
@@ -596,12 +605,7 @@ select:focus {
     animation-delay: 2.5s;
 }
 
-/* .raindrop18{
-    left: 1700px;
-  
-  height: 15px;
-    animation: rain 3s ease-in-out infinite;
-} */
+
 @keyframes rain {
     0% {
         top: -100px;
@@ -1096,7 +1100,8 @@ small {
 
 footer {
 
-    padding: 0;
+    padding: 0.6rem;
+    background-color: #1b1d1d;
 }
 
 footer p {
