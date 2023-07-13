@@ -223,6 +223,16 @@ select:focus {
     background: radial-gradient(circle at center, var(--gradient-middle) 0%, var(--gradient-start) 100%, var(--gradient-end) 200%);
     padding-inline: 1rem;
     border: var(--border) 1px solid;
+    text-shadow: 
+    1px 1px 1px rgba(255, 253, 253, 0.966), 
+    -1px -1px 1px rgba(255, 253, 253, 0.966), 
+    -1px 1px 1px rgba(255, 253, 253, 0.966), 
+    1px -1px 1px rgba(255, 253, 253, 0.966),
+    2px 2px 1.2rem rgba(0, 0, 0, 0.699),
+    -2px -2px 1.2rem rgba(0, 0, 0, 0.699),
+    -2px 2px 1.2rem rgba(0, 0, 0, 0.699),
+    2px -2px 1.2rem rgba(0, 0, 0, 0.699);
+  
     color: var(--border);
     font-size: 1.2rem;
     border-radius: 100vmax;

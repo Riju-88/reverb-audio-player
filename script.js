@@ -224,7 +224,7 @@ document.querySelector("#audio-duration").innerHTML =
       // add settimeout to auto close dialog
       setTimeout(() => {
         notificationDialog.close();
-      },2000);
+      },2600);
 
 
     })
@@ -314,7 +314,7 @@ console.log(arrImage);
       // add settimeout to auto close dialog
       setTimeout(() => {
         notificationDialog.close();
-      },2000);
+      },2600);
 
     })
 
@@ -570,7 +570,7 @@ audioElement.play();
 // add settimeout to auto close dialog
 setTimeout(() => {
   notificationDialog.close();
-},2000);
+},2600);
 
 setInterval(() => {
 let minutes = Math.floor(audioElement.currentTime / 60);
@@ -791,7 +791,7 @@ audioElement.play();
     // add settimeout to auto close dialog
     setTimeout(() => {
     notificationDialog.close();
-    },2000);
+    },2600);
 
 setInterval(() => {
 let minutes = Math.floor(audioElement.currentTime / 60);
